@@ -22,5 +22,4 @@ Users can subscribe to their favorite authors to stay updated on their latest wr
 ### 6. User and Book Search
 The platform allows users to easily search for other users and books. The search feature enables users to find specific individuals or books based on keywords, titles, or author names, enhancing the overall user experience.
 
-## UML use-case diagram:
-![uml use-case](https://asset.cloudinary.com/dkmamwfce/5c72f03066fdd4ff91c74ea66ec96c1d)
+## UML use-case diagram:![nb-use-case-uml ](https://github.com/samoskyd/NeatBook/assets/65396199/6a09f6f5-ba0c-4128-8933-26789972e2ff)
