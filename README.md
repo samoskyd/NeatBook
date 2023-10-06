@@ -23,4 +23,4 @@ Users can subscribe to their favorite authors to stay updated on their latest wr
 The platform allows users to easily search for other users and books. The search feature enables users to find specific individuals or books based on keywords, titles, or author names, enhancing the overall user experience.
 
 ## UML use-case diagram:
-![uml use-case](https://drive.google.com/file/d/1YSrChtFPHYFot1gOrA6ZWmVyasVZK22i/view?usp=sharing)
+![uml use-case](https://photos.app.goo.gl/hx1GtUcT9zTNbTGh9)
