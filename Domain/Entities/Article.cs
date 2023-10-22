@@ -11,12 +11,12 @@ namespace NeatBook.Domain.Entities
     public class Article : BaseAuditableEntity
     {
         public DateTime CreationDate { get; set; }
-        public DateTime PublishingDate { get; set; }
+        public bool Published { get; set; }
+        public DateTime? PublishingDate { get; set; }
         public ArticleGenre ArticleGenre { get; set; }
         public Language Language { get; set; }
         public bool AgeRestrictions { get; set; }
         public AuthorRights AuthorRights { get; set; }
-        public bool IsPublished { get; set; }
         public int ViewCount { get; set; }
         public string Name { get; set; }
         public string Text { get; set; }

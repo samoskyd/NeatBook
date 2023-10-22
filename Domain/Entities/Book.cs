@@ -19,7 +19,7 @@ namespace NeatBook.Domain.Entities
         public bool AgeRestriction { get; set; }
         public bool Published { get; set; }
         public DateTime CreationDate { get; set; }
-        public DateTime PublishingDate { get; set; }
+        public DateTime? PublishingDate { get; set; }
         public int ViewCount { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }

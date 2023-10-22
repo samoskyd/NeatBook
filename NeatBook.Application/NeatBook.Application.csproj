@@ -7,17 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\" />
-    <Folder Include="DTOs\" />
-    <Folder Include="Features\Articles\Commands\" />
-    <Folder Include="Features\Articles\Queries\" />
-    <Folder Include="Features\Books\Commands\" />
-    <Folder Include="Features\Books\Queries\" />
-    <Folder Include="Features\Chapters\Commands\" />
-    <Folder Include="Features\Chapters\Queries\" />
-    <Folder Include="Features\Users\Commands\" />
-    <Folder Include="Features\Users\Queries\" />
-    <Folder Include="Interfaces\" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\NeatBook.Domain.csproj" />
+    <ProjectReference Include="..\NeatBook.Infrastructure\NeatBook.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
