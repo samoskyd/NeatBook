@@ -11,7 +11,7 @@ namespace NeatBook.Domain.Entities
     {
         public string Name { get; set; }
         public int Order { get; set; }
-        public string Text { get; set; }
+        public string? Text { get; set; }
         public bool Published { get; set; }
         public DateTime? PublishingDate { get; set; }
         public DateTime CreationDate { get; set; }

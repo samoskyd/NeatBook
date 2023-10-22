@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeatBook.Domain.Enums.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,11 @@ namespace NeatBook.Domain.Enums
 {
     public enum AuthorRights
     {
-        None = "None",
-        CreativeCommons = "Creative Commons",
-        AllProtected = "All rights protected"
+        [StringValue("None")]
+        None,
+        [StringValue("Creative Commons")]
+        CreativeCommons,
+        [StringValue("All rights protected")]
+        AllProtected
     }
 }

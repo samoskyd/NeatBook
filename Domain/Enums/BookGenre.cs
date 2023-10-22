@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeatBook.Domain.Enums.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,13 @@ namespace NeatBook.Domain.Enums
 {
     public enum BookGenre
     {
-        Horror = "Horror",
-        Science = "Science",
-        Romcom = "Romcom",
-        Detective = "Detective"
+        [StringValue("Horror")]
+        Horror,
+        [StringValue("Science")]
+        Science,
+        [StringValue("Romcom")]
+        Romcom,
+        [StringValue("Detective")]
+        Detective
     }
 }

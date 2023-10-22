@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeatBook.Domain.Enums.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,13 @@ namespace NeatBook.Domain.Enums
 {
     public enum ArticleGenre
     {
-        Science = "Science",
-        Arts = "Arts",
-        Sport = "Sport",
-        Personal = "Personal"
+        [StringValue("Science")]
+        Science,
+        [StringValue("Arts")]
+        Arts,
+        [StringValue("Sport")]
+        Sport,
+        [StringValue("Personal")]
+        Personal
     }
 }

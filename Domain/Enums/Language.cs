@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeatBook.Domain.Enums.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,9 @@ namespace NeatBook.Domain.Enums
 {
     public enum Language
     {
-        Ukrainian = "Ukrainian",
-        English = "English"
+        [StringValue("Ukrainian")]
+        Ukrainian,
+        [StringValue("English")]
+        English
     }
 }

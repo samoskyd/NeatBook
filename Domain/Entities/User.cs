@@ -12,11 +12,11 @@ namespace NeatBook.Domain.Entities
     {
         public string Name { get; set; }
         public string Nickname { get; set; }
-        public string Surname { get; set; }
+        public string? Surname { get; set; }
         public DateTime BirthDate { get; set; }
-        public UserSex UserSex { get; set; }
-        public string BioText { get; set; }
-        public string SocialLink { get; set; }
+        public UserSex? UserSex { get; set; }
+        public string? BioText { get; set; }
+        public string? SocialLink { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
         public ICollection<UserFollows>? Followers { get; set; } = new List<UserFollows>();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeatBook.Domain.Enums.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,13 @@ namespace NeatBook.Domain.Enums
 {
     public enum UserSex
     {
-        Male = "Male",
-        Female = "Female",
-        Other = "Other",
-        PreferNotToSay = "Prefer not to say"
+        [StringValue("Male")]
+        Male,
+        [StringValue("Female")]
+        Female,
+        [StringValue("Other")]
+        Other,
+        [StringValue("Prefer not to say")]
+        PreferNotToSay
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using NeatBook.Infrastructure.Config;
 
 namespace NeatBook.Infrastructure.Extension
 {
@@ -15,18 +16,13 @@ namespace NeatBook.Infrastructure.Extension
     {
         public static void AddInfrastructureLayer(this IServiceCollection services, IConfiguration configuration)
         {
-            //services.AddServices();
+            //services.AddTransient<IConfigurationService, ConfigurationService>();
+            //services.AddDbContext<NeatBookDbContext>();
             services.AddDbContext(configuration);
         }
 
-        private static void AddServices(this IServiceCollection services)
-        {
-            //
-        }
         public static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
-
             services.AddDbContext<NeatBookDbContext>(options => {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });

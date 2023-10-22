@@ -10,14 +10,27 @@ namespace NeatBook.Infrastructure.Contexts
 {
     public class NeatBookDbContext: DbContext
     {
+        public NeatBookDbContext()
+        { }
+
         public NeatBookDbContext(DbContextOptions<NeatBookDbContext> options) : base(options)
+        { }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder
+                    .UseSqlServer("Server=DESKTOP-MSJIALE;Database=NeatBook.DB;" +
+                    "Trusted_Connection=True;" +
+                    "TrustServerCertificate=True;MultipleActiveResultSets=true");
+            }
         }
 
         public virtual DbSet<Article> Articles { get; set; }
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Chapter> Chapters { get; set; }
-        public virtual DbSet<BookComment> BookCommments { get; set; }
+        public virtual DbSet<BookComment> BookComments { get; set; }
         public virtual DbSet<ArticleComment> ArticleComments { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserFollows> UserFollows { get; set; }
@@ -44,112 +57,134 @@ namespace NeatBook.Infrastructure.Contexts
             modelBuilder.Entity<User>()
                 .HasMany(p => p.Articles)
                 .WithOne(c => c.User)
-                .HasForeignKey(c => c.UserId);
-            
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<User>()
                 .HasMany(p => p.BookComments)
                 .WithOne(c => c.User)
-                .HasForeignKey(c => c.UserId);
-            
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<User>()
                 .HasMany(p => p.ArticleComments)
                 .WithOne(c => c.User)
-                .HasForeignKey(c => c.UserId);
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<User>()
                 .HasMany(p => p.Books)
                 .WithOne(c => c.User)
-                .HasForeignKey(c => c.UserId);
-            
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<User>()
                 .HasMany(p => p.LikedBooks)
                 .WithOne(c => c.User)
-                .HasForeignKey(c => c.UserId);
-            
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<User>()
                 .HasMany(p => p.LikedArticles)
                 .WithOne(c => c.User)
-                .HasForeignKey(c => c.UserId);
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<UserLikesBooks>()
                 .HasOne(c => c.User)
                 .WithMany(p => p.LikedBooks)
-                .HasForeignKey(c => c.UserId);
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<UserLikesBooks>()
                 .HasOne(c => c.Book)
                 .WithMany(p => p.Likes)
-                .HasForeignKey(c => c.BookId);
-            
+                .HasForeignKey(c => c.BookId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<UserLikesArticles>()
                 .HasOne(c => c.User)
                 .WithMany(p => p.LikedArticles)
-                .HasForeignKey(c => c.UserId);
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<UserLikesArticles>()
                 .HasOne(c => c.Article)
                 .WithMany(p => p.Likes)
-                .HasForeignKey(c => c.ArticleId);
+                .HasForeignKey(c => c.ArticleId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Chapter>()
                 .HasOne(c => c.Book)
                 .WithMany(p => p.Chapters)
-                .HasForeignKey(c => c.BookId);
+                .HasForeignKey(c => c.BookId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Article>()
                .HasOne(c => c.User)
                .WithMany(p => p.Articles)
-               .HasForeignKey(c => c.UserId);
+               .HasForeignKey(c => c.UserId)
+               .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Article>()
                .HasMany(p => p.Comments)
                .WithOne(c => c.Article)
-               .HasForeignKey(c => c.ArticleId);
-            
+               .HasForeignKey(c => c.ArticleId)
+               .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<Article>()
                .HasMany(p => p.Likes)
                .WithOne(c => c.Article)
-               .HasForeignKey(c => c.ArticleId);
+               .HasForeignKey(c => c.ArticleId)
+               .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Book>()
                .HasOne(c => c.User)
                .WithMany(p => p.Books)
-               .HasForeignKey(c => c.UserId);
+               .HasForeignKey(c => c.UserId)
+               .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Book>()
                .HasMany(p => p.Comments)
                .WithOne(c => c.Book)
-               .HasForeignKey(c => c.BookId);
-            
+               .HasForeignKey(c => c.BookId)
+               .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<Book>()
                .HasMany(p => p.Likes)
                .WithOne(c => c.Book)
-               .HasForeignKey(c => c.BookId);
-            
+               .HasForeignKey(c => c.BookId)
+               .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<Book>()
                .HasMany(p => p.Chapters)
                .WithOne(c => c.Book)
-               .HasForeignKey(c => c.BookId);
+               .HasForeignKey(c => c.BookId)
+               .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<BookComment>()
                .HasOne(c => c.User)
                .WithMany(p => p.BookComments)
-               .HasForeignKey(c => c.UserId);
-            
+               .HasForeignKey(c => c.UserId)
+               .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<BookComment>()
                .HasOne(c => c.Book)
                .WithMany(p => p.Comments)
-               .HasForeignKey(c => c.BookId);
-            
+               .HasForeignKey(c => c.BookId)
+               .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<ArticleComment>()
                .HasOne(c => c.User)
                .WithMany(p => p.ArticleComments)
-               .HasForeignKey(c => c.UserId);
-            
+               .HasForeignKey(c => c.UserId)
+               .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<ArticleComment>()
                .HasOne(c => c.Article)
                .WithMany(p => p.Comments)
-               .HasForeignKey(c => c.ArticleId);
+               .HasForeignKey(c => c.ArticleId)
+               .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(modelBuilder);
         }

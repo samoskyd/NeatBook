@@ -1,5 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using NeatBook.Application.Features.Articles.Queries.GetTenArticles;
+using NeatBook.Application.Features.Books.Queries.GetTenBooks;
+using NeatBook.Application.Features.Users.Queries.GetTenUsers;
 using NeatBookMVC.Models;
 using System.Diagnostics;
 
@@ -16,12 +19,20 @@ namespace NeatBookMVC.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            // books, articles and users filled from application layer
-            // filling view model with these data parts
-            // returning View with this model
-            return View();
+            var tenBooks = await _mediator.Send(new GetTenBooksQuery());
+            var tenUsers = await _mediator.Send(new GetTenUsersQuery());
+            var tenArticles = await _mediator.Send(new GetTenArticlesQuery());
+
+            var viewModel = new HomePageViewModel
+            {
+                Books = tenBooks,
+                Articles = tenArticles,
+                Users = tenUsers
+            };
+
+            return View(viewModel);
         }
     }
 }
