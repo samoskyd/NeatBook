@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -13,8 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\BookList\" />
-    <Folder Include="Views\BookDetails\" />
     <Folder Include="Views\BookForm\" />
     <Folder Include="Views\ChapterList\" />
     <Folder Include="Views\ChapterDetails\" />

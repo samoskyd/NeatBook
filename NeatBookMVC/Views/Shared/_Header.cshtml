@@ -1,8 +1,31 @@
-﻿<nav>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/Book">Books</a></li>
-        <li><a href="/User">Users</a></li>
-        <li><a href="/Article">Articles</a></li>
-    </ul>
-</nav>
+﻿<head>
+    <link rel="stylesheet" type="text/css" href="~/css/header.css">
+</head>
+<div class="header">
+    <div class="logo">
+        <a style="color:white;" href="@Url.Action("Index", "Home")">Home</a>
+    </div>
+    <div class="nav">
+        <ul>
+            <li><a href="@Url.Action("Articles", "Home")">Articles</a></li>
+            <li><a href="@Url.Action("Users", "Home")">Users</a></li>
+            <li><a href="@Url.Action("Index", "BookList")">Books</a></li>
+        </ul>
+    </div>
+    <div class="user-profile">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a href="@Url.Action("UserProfile", "User", new { id = User.Identity.Name })">Profile</a>
+        }
+        else
+        {
+            <a href="@Url.Action("Login", "Account")">Login</a>
+        }
+    </div>
+    <div class="search">
+        <form action="@Url.Action("Search", "Home")" method="get">
+            <input type="text" name="query" placeholder="Search">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</div>

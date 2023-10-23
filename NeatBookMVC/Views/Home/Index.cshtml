@@ -1,36 +1,37 @@
 ﻿@model NeatBookMVC.Models.HomePageViewModel
 
-<h1>Welcome to the Home Page</h1>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/home.css">
+</head>
 
 <div class="block">
-    <h2>Books</h2>
+    <h3>Books</h3>
     <ul>
-        @foreach (var book in Model.Books)
+        @foreach (var book in Model.Books.Take(10))
         {
-            <li>@book.Name</li>
+            <li><a asp-controller="BookDetails" asp-action="Index">@book.Name</a></li>
         }
     </ul>
-    @Html.ActionLink("See More Books", "Books", "Book")
 </div>
 
 <div class="block">
-    <h2>Articles</h2>
+    <h3>Articles</h3>
     <ul>
-        @foreach (var article in Model.Articles)
+        @foreach (var article in Model.Articles.Take(10))
         {
-            <li>@article.Name</li>
+            <li><a asp-controller="ArticleDetails" asp-action="Index">@article.Name</a></li>
         }
     </ul>
-    @Html.ActionLink("See More Articles", "Articles", "Article")
 </div>
 
 <div class="block">
-    <h2>Users</h2>
+    <h3>Users</h3>
     <ul>
-        @foreach (var user in Model.Users)
+        @foreach (var user in Model.Users.Take(10))
         {
-            <li>@user.Name</li>
+            <li><a asp-controller="UserProfile" asp-action="Index">@user.Name</a></li>
         }
     </ul>
-    @Html.ActionLink("See More Users", "Users", "User")
 </div>
+
+

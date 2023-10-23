@@ -1,0 +1,29 @@
+﻿@model NeatBookMVC.Models.BookListViewModel
+
+<h2>Book List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Genre</th>
+            <th>Language</th>
+            <th>Published Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model.Books)
+        {
+            <tr>
+                <td>@book.Name</td>
+                <td>@book.BookGenre</td>
+                <td>@book.Language</td>
+                <td>@book.PublishingDate</td>
+                <td>
+                    <a href="@Url.Action("Index", "BookDetails")">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

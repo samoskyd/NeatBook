@@ -1,0 +1,38 @@
+﻿.block {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.block h3 {
+     font-size: 24px;
+     font-weight: bold;
+}
+
+ .block ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
+}
+
+.block li {
+      margin: 20px 0;
+      text-align: center;
+      width: 20%;
+}
+
+.block li a {
+       text-decoration: none;
+       color: #5082b7;
+       font-weight: bold;
+
+}

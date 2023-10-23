@@ -1,0 +1,29 @@
+﻿@model NeatBookMVC.Models.BookDetailsViewModel
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/bookdetails.css">
+</head>
+
+<h2>Book Details</h2>
+
+<div>
+    <h3>@Model.Name</h3>
+    <p>Genre: @Model.BookGenre</p>
+    <p>Language: @Model.Language</p>
+    <p>Description: @Model.Description</p>
+    <p>Status: @Model.BookStatus</p>
+    <p>Rights: @Model.AuthorRights</p>
+    <p>Age Restriction: @Model.AgeRestriction</p>
+    <p>Creation Date: @Model.CreationDate.ToShortDateString()</p>
+    @if (Model.PublishingDate.HasValue)
+    {
+        <p>Publishing Date: @Model.PublishingDate.Value.ToShortDateString()</p>
+    }
+    <p>View Count: @Model.ViewCount</p>
+    <p>Created by: @Model.UserNickname</p>
+    <p>Chapters: @Model.ChaptersCount</p>
+    <p>Comments: @Model.CommentsCount</p>
+    <p>Likes: @Model.LikesCount</p>
+
+    <a href="@Url.Action("ReadBook", "Book", new { id = Model.UserId })" class="btn btn-primary">Read Book</a>
+</div>
