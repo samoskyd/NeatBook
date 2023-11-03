@@ -13,18 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\BookForm\" />
-    <Folder Include="Views\ChapterList\" />
-    <Folder Include="Views\ChapterDetails\" />
-    <Folder Include="Views\ChapterForm\" />
-    <Folder Include="Views\ArticleList\" />
-    <Folder Include="Views\ArticleForm\" />
-    <Folder Include="Views\ArticleDetails\" />
-    <Folder Include="Views\Feed\" />
-    <Folder Include="Views\SearchResults\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MediatR" Version="12.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.12">
       <PrivateAssets>all</PrivateAssets>
@@ -34,6 +22,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
   </ItemGroup>
 
 </Project>

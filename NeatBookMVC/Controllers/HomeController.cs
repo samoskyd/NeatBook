@@ -5,6 +5,7 @@ using NeatBook.Application.Features.Books.Queries.GetTenBooks;
 using NeatBook.Application.Features.Users.Queries.GetTenUsers;
 using NeatBookMVC.MockData;
 using NeatBookMVC.Models;
+using NeatBookMVC.Models.CompositeViewModels;
 using System.Diagnostics;
 
 namespace NeatBookMVC.Controllers
@@ -22,19 +23,16 @@ namespace NeatBookMVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            //var tenBooks = await _mediator.Send(new GetTenBooksQuery());
-            //var tenUsers = await _mediator.Send(new GetTenUsersQuery());
-            //var tenArticles = await _mediator.Send(new GetTenArticlesQuery());
+            var tenBooks = await _mediator.Send(new GetTenBooksQuery());
+            var tenUsers = await _mediator.Send(new GetTenUsersQuery());
+            var tenArticles = await _mediator.Send(new GetTenArticlesQuery());
 
-            //var viewModel = new HomePageViewModel
-            //{
-            //    Books = tenBooks,
-            //    Articles = tenArticles,
-            //    Users = tenUsers
-            //};
-
-            var mockData = new MockHomeModel();
-            var viewModel = mockData.GenerateMockData();
+            var viewModel = new HomePageViewModel
+            {
+                Books = tenBooks,
+                Articles = tenArticles,
+                Users = tenUsers
+            };
 
             return View(viewModel);
         }

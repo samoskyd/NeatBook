@@ -1,6 +1,6 @@
 ﻿using NeatBook.Domain.Entities;
 
-namespace NeatBookMVC.Models
+namespace NeatBookMVC.Models.CompositeViewModels
 {
     public class HomePageViewModel
     {

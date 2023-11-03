@@ -1,5 +1,5 @@
 ﻿using NeatBook.Domain.Enums;
-using NeatBookMVC.Models;
+using NeatBookMVC.Models.DetailsViewModels;
 
 namespace NeatBookMVC.MockData
 {

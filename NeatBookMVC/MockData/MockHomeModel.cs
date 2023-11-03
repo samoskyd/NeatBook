@@ -1,6 +1,6 @@
 ﻿using NeatBook.Domain.Entities;
 using NeatBook.Domain.Enums;
-using NeatBookMVC.Models;
+using NeatBookMVC.Models.CompositeViewModels;
 
 namespace NeatBookMVC.MockData
 {

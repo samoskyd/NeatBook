@@ -3,11 +3,13 @@ using NeatBookMVC.MockData;
 
 namespace NeatBookMVC.Controllers
 {
-    public class UserProfileController : Controller
+    // BookDetailsController
+
+    public class BooksController : Controller
     {
         public IActionResult Index()
         {
-            var mockData = new MockUserProfile();
+            var mockData = new MockBookDetails();
             var model = mockData.GenerateMockData();
             return View(model);
         }
