@@ -1,6 +1,8 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NeatBook.Application.Features.Books.Queries.GetBookById;
+using NeatBook.Application.Features.Users.Commands.UpdateUser;
 using NeatBook.Application.Features.Users.Queries.GetUserById;
 using NeatBook.Domain.Entities;
 using NeatBookMVC.DTOs;
@@ -13,11 +15,13 @@ namespace NeatBookMVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public UsersController(ILogger<HomeController> logger, IMediator mediator)
+        public UsersController(ILogger<HomeController> logger, IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
             _logger = logger;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Details(int id)
@@ -29,8 +33,7 @@ namespace NeatBookMVC.Controllers
                 return NotFound();
             }
 
-            //add mapper
-            var viewModel = new UserDetailsViewModel();
+            UserDetailsViewModel viewModel = _mapper.Map<UserDetailsViewModel>(user);
 
             return View(viewModel);
         }
@@ -40,23 +43,23 @@ namespace NeatBookMVC.Controllers
         {
             var user = await _mediator.Send(new GetUserByIdQuery(id));
 
-            var model = new UserDto();
+            UserDto model = _mapper.Map<UserDto>(user);
 
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Form(UserDto model)
+        public async Task<IActionResult> Form(UserDto model)
         {
             if (ModelState.IsValid)
             {
-                // find user and update with existing model
-                // Correctly redirrect to details
-                return RedirectToAction("Index");
+                var user = _mapper.Map<User>(model);
+                await _mediator.Send(new UpdateUserCommand(user));
+                
+                return RedirectToAction("List");
             }
 
-            // If the model state is not valid, redisplay the edit form with validation errors
             return View(model);
         }
     }

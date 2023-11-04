@@ -2,17 +2,17 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NeatBook.Application.Features.Articles.Queries.GetArticleById;
+using NeatBook.Application.Features.Books.Commands.UpdateBook;
 using NeatBook.Application.Features.Books.Queries.GetBookById;
+using NeatBook.Application.Features.Users.Commands.UpdateUser;
 using NeatBook.Domain.Entities;
 using NeatBookMVC.DTOs;
-using NeatBookMVC.MockData;
 using NeatBookMVC.Models.Articles;
 using NeatBookMVC.Models.Books;
+using NeatBookMVC.Models.Users;
 
 namespace NeatBookMVC.Controllers
 {
-    // BookDetailsController
-
     public class BooksController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -46,8 +46,7 @@ namespace NeatBookMVC.Controllers
                 return NotFound();
             }
 
-            //add mapper
-            var viewModel = new BookDetailsViewModel();
+            BookDetailsViewModel viewModel = _mapper.Map<BookDetailsViewModel>(book);
 
             return View(viewModel);
         }
@@ -57,23 +56,23 @@ namespace NeatBookMVC.Controllers
         {
             var book = await _mediator.Send(new GetBookByIdQuery(id));
 
-            var model = new BookDto();
+            BookDto model = _mapper.Map<BookDto>(book);
 
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Form(BookDto model)
+        public async Task<IActionResult> Form(BookDto model)
         {
             if (ModelState.IsValid)
             {
-                // find book and update with existing model
-                // Correctly redirrect to details
-                return RedirectToAction("Index");
+                var book = _mapper.Map<Book>(model);
+                await _mediator.Send(new UpdateBookCommand(book));
+
+                return RedirectToAction("List");
             }
 
-            // If the model state is not valid, redisplay the edit form with validation errors
             return View(model);
         }
     }

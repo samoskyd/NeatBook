@@ -1,10 +1,14 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using NeatBook.Application.Features.Articles.Commands.UpdateArticle;
 using NeatBook.Application.Features.Articles.Queries.GetArticleById;
+using NeatBook.Application.Features.Users.Commands.UpdateUser;
 using NeatBook.Domain.Entities;
 using NeatBook.Domain.Enums;
 using NeatBookMVC.DTOs;
 using NeatBookMVC.Models.Articles;
+using NeatBookMVC.Models.Users;
 
 namespace NeatBookMVC.Controllers
 {
@@ -12,11 +16,13 @@ namespace NeatBookMVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public ArticlesController(ILogger<HomeController> logger, IMediator mediator)
+        public ArticlesController(ILogger<HomeController> logger, IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
             _logger = logger;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> List()
@@ -39,17 +45,7 @@ namespace NeatBookMVC.Controllers
                 return NotFound();
             }
 
-            //add mapper
-            var viewModel = new ArticleDetailsViewModel
-            {
-                Name = article.Name,
-                ArticleGenre = article.ArticleGenre,
-                Language = article.Language,
-                AgeRestrictions = article.AgeRestrictions,
-                AuthorRights = article.AuthorRights,
-                PublishingDate = article.PublishingDate,
-                Text = article.Text
-            };
+            ArticleDetailsViewModel viewModel = _mapper.Map<ArticleDetailsViewModel>(article);
 
             return View(viewModel);
         }
@@ -59,32 +55,23 @@ namespace NeatBookMVC.Controllers
         {
             var article = await _mediator.Send(new GetArticleByIdQuery(id));
 
-            var model = new ArticleDto
-            {
-                Id = article.Id,
-                Name = article.Name,
-                Text = article.Text,
-                ArticleGenre = article.ArticleGenre,
-                Language = article.Language,
-                AgeRestrictions = article.AgeRestrictions,
-                AuthorRights = article.AuthorRights,
-                Published = article.Published
-            };
+            ArticleDto model = _mapper.Map<ArticleDto>(article);
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Form(ArticleDto model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Form(ArticleDto model)
         {
             if (ModelState.IsValid)
             {
-                // find article and update with existing model
-                // Correctly redirrect to details
-                return RedirectToAction("Index");
+                var article = _mapper.Map<Article>(model);
+                await _mediator.Send(new UpdateArticleCommand(article));
+
+                return RedirectToAction("List");
             }
 
-            // If the model state is not valid, redisplay the edit form with validation errors
             return View(model);
         }
     }

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using NeatBook.Application.Features.Articles.Queries.GetTenArticles;
 using NeatBook.Application.Features.Books.Queries.GetTenBooks;
 using NeatBook.Application.Features.Users.Queries.GetTenUsers;
-using NeatBookMVC.MockData;
 using NeatBookMVC.Models;
 using NeatBookMVC.Models.CompositeViewModels;
 using System.Diagnostics;

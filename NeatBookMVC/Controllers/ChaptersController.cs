@@ -1,11 +1,15 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NeatBook.Application.Features.Books.Queries.GetBookById;
+using NeatBook.Application.Features.Chapters.Commands.UpdateChapter;
 using NeatBook.Application.Features.Chapters.Queries.GetChapterById;
+using NeatBook.Application.Features.Users.Commands.UpdateUser;
 using NeatBook.Domain.Entities;
 using NeatBookMVC.DTOs;
 using NeatBookMVC.Models.Books;
 using NeatBookMVC.Models.Chapters;
+using NeatBookMVC.Models.Users;
 
 namespace NeatBookMVC.Controllers
 {
@@ -13,11 +17,13 @@ namespace NeatBookMVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public ChaptersController(ILogger<HomeController> logger, IMediator mediator)
+        public ChaptersController(ILogger<HomeController> logger, IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
             _logger = logger;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> List()
@@ -40,8 +46,7 @@ namespace NeatBookMVC.Controllers
                 return NotFound();
             }
 
-            //add mapper
-            var viewModel = new ChapterDetailsViewModel();
+            ChapterDetailsViewModel viewModel = _mapper.Map<ChapterDetailsViewModel>(chapter);
 
             return View(viewModel);
         }
@@ -51,24 +56,24 @@ namespace NeatBookMVC.Controllers
         {
             var chapter = await _mediator.Send(new GetChapterByIdQuery(id));
 
-            var model = new ChapterDto();
+            ChapterDto model = _mapper.Map<ChapterDto>(chapter);
 
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Form(ChapterDto model)
+        public async Task<IActionResult> Form(ChapterDto model)
         {
             if (ModelState.IsValid)
             {
-                // find Chapter and update with existing model
-                // Correctly redirrect to details
-                return RedirectToAction("Index");
+                var chapter = _mapper.Map<Chapter>(model);
+                await _mediator.Send(new UpdateChapterCommand(chapter));
+
+                return RedirectToAction("List");
             }
 
-            // If the model state is not valid, redisplay the edit form with validation errors
-            return View(model);
+             return View(model);
         }
     }
 }
