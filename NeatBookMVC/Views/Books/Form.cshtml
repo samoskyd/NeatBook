@@ -1,4 +1,4 @@
-﻿@model NeatBookMVC.Models.BookDto
+﻿@model NeatBookMVC.DTOs.BookDto
 
 @using (Html.BeginForm("Form", "Book", FormMethod.Post))
 {
@@ -18,7 +18,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.Language)
-        @Html.DropDownListFor(model => model.Language, new SelectList(Enum.GetValues(typeof(Language)), model.Language), "Select a language", new { @class = "form-control" })
+        @Html.DropDownListFor(model => model.Language, new SelectList(Enum.GetValues(typeof(Language)), Model.Language), "Select a language", new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Language)
     </div>
 
