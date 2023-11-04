@@ -1,8 +1,4 @@
-﻿@model BookDetailsViewModel
-
-<head>
-    <link rel="stylesheet" type="text/css" href="~/css/bookdetails.css">
-</head>
+﻿@model NeatBookMVC.Models.BookDetailsViewModel
 
 <h2>Book Details</h2>
 
@@ -24,6 +20,4 @@
     <p>Chapters: @Model.ChaptersCount</p>
     <p>Comments: @Model.CommentsCount</p>
     <p>Likes: @Model.LikesCount</p>
-
-    <a href="@Url.Action("ReadBook", "Book", new { id = Model.UserId })" class="btn btn-primary">Read Book</a>
 </div>

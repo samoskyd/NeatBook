@@ -1,5 +1,33 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model NeatBookMVC.Models.ArticleListViewModel
+
+<h2>Articles</h2>
+
+@if (Model.Articles != null && Model.Articles.Any())
+{
+    <ul>
+        @foreach (var article in Model.Articles)
+        {
+            <li>
+                <h3>@article.Name</h3>
+                <p>Genre: @article.ArticleGenre</p>
+                <p>Language: @article.Language</p>
+                <p>Age Restrictions: @article.AgeRestrictions</p>
+                <p>Author Rights: @article.AuthorRights</p>
+                <p>Creation Date: @article.CreationDate.ToShortDateString()</p>
+                <p>Published: @article.Published</p>
+                @if (article.PublishingDate.HasValue)
+                {
+                    <p>Publishing Date: @article.PublishingDate.Value.ToShortDateString()</p>
+                }
+                <p>View Count: @article.ViewCount</p>
+                <p>Created by: @article.User.Nickname</p>
+                <p>Comments Count: @article.Comments.Count</p>
+                <p>Likes Count: @article.Likes.Count</p>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No articles available.</p>
 }

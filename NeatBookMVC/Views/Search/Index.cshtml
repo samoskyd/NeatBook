@@ -1,13 +1,9 @@
-﻿@model HomePageViewModel
-
-<head>
-    <link rel="stylesheet" type="text/css" href="~/css/home.css">
-</head>
+﻿@model SearchResultViewModel
 
 <div class="block">
     <h3>Books</h3>
     <ul>
-        @foreach (var book in Model.Books.Take(10))
+        @foreach (var book in Model.Books)
         {
             <li><a asp-controller="Books" asp-action="Details" asp-route-id="@book.Id">@book.Name</a></li>
         }
@@ -17,7 +13,7 @@
 <div class="block">
     <h3>Articles</h3>
     <ul>
-        @foreach (var article in Model.Articles.Take(10))
+        @foreach (var article in Model.Articles)
         {
             <li><a asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id">@article.Name</a></li>
         }
@@ -27,11 +23,9 @@
 <div class="block">
     <h3>Users</h3>
     <ul>
-        @foreach (var user in Model.Users.Take(10))
+        @foreach (var user in Model.Users)
         {
             <li><a asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">@user.Name</a></li>
         }
     </ul>
 </div>
-
-

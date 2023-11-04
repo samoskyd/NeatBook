@@ -1,5 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model NeatBookMVC.Models.ChapterListViewModel
+
+<h2>Chapters</h2>
+
+@if (Model.Chapters != null && Model.Chapters.Any())
+{
+    <ul>
+        @foreach (var chapter in Model.Chapters)
+        {
+            <li>
+                <h3>@chapter.Name</h3>
+                <p>Order: @chapter.Order</p>
+                <p>Published: @chapter.Published</p>
+                @if (chapter.PublishingDate.HasValue)
+                {
+                    <p>Publishing Date: @chapter.PublishingDate.Value.ToShortDateString()</p>
+                }
+                <p>Creation Date: @chapter.CreationDate.ToShortDateString()</p>
+                <p>Book ID: @chapter.BookId</p>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No chapters available for this book.</p>
 }

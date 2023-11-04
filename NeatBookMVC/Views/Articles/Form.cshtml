@@ -1,5 +1,69 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model ArticleDto
+
+<h2>Edit Article</h2>
+
+<form asp-action="Form" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Text"></label>
+        <textarea asp-for="Text" class="form-control"></textarea>
+        <span asp-validation-for="Text" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ArticleGenre"></label>
+        <select asp-for="ArticleGenre" class="form-control">
+            <option value="">Select Genre</option>
+            @foreach (var genre in Enum.GetValues(typeof(ArticleGenre)))
+            {
+                <option value="@genre">@genre</option>
+            }
+        </select>
+        <span asp-validation-for="ArticleGenre" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Language"></label>
+        <select asp-for="Language" class="form-control">
+            <option value="">Select Language</option>
+            @foreach (var language in Enum.GetValues(typeof(Language)))
+            {
+                <option value="@language">@language</option>
+            }
+        </select>
+        <span asp-validation-for="Language" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AgeRestrictions"></label>
+        <input asp-for="AgeRestrictions" type="checkbox" />
+        <span asp-validation-for="AgeRestrictions" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AuthorRights"></label>
+        <select asp-for="AuthorRights" class="form-control">
+            <option value="">Select Author Rights</option>
+            @foreach (var rights in Enum.GetValues(typeof(AuthorRights)))
+            {
+                <option value="@rights">@rights</option>
+            }
+        </select>
+        <span asp-validation-for="AuthorRights" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Published"></label>
+        <input asp-for="Published" type="checkbox" />
+        <span asp-validation-for="Published" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

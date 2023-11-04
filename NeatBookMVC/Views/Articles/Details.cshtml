@@ -1,5 +1,18 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model ArticleDetailsViewModel
+
+<h2>Article Details</h2>
+
+<div>
+    <h3>@Model.Name</h3>
+    <p>Genre: @Model.ArticleGenre</p>
+    <p>Language: @Model.Language</p>
+    <p>Age Restrictions: @Model.AgeRestrictions</p>
+    <p>Author Rights: @Model.AuthorRights</p>
+    @if (Model.PublishingDate.HasValue)
+    {
+        <p>Publishing Date: @Model.PublishingDate.Value.ToShortDateString()</p>
+    }
+
+    <p>Text:</p>
+    <div>@Html.Raw(Model.Text)</div>
+</div>

@@ -6,6 +6,8 @@ namespace NeatBookMVC.DTOs
 {
     public class UserDto
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Please provide a correct name.")]
         [StringLength(20, MinimumLength = 3)]
         public string Name { get; set; }

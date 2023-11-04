@@ -1,8 +1,15 @@
-﻿@model NeatBookMVC.Models.FeedViewModel
+﻿@model NeatBookMVC.Models.UserDetailsViewModel
 
-<h2>Feed</h2>
+<h2>User Details</h2>
 
-<h3>New Books</h3>
+<h3>@Model.Name @Model.Surname (@Model.Nickname)</h3>
+<p>Bio: @Model.BioText</p>
+<p>Social Link: <a href="@Model.SocialLink">@Model.SocialLink</a></p>
+
+<p>Followers: @Model.FollowersCount</p>
+<p>Following: @Model.FollowingCount</p>
+
+<h3>Books</h3>
 <ul>
     @foreach (var book in Model.Books)
     {
@@ -12,7 +19,7 @@
     }
 </ul>
 
-<h3>New Articles</h3>
+<h3>Articles</h3>
 <ul>
     @foreach (var article in Model.Articles)
     {

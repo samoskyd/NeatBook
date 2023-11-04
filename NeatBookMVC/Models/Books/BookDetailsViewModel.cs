@@ -1,7 +1,7 @@
 ﻿using NeatBook.Domain.Entities;
 using NeatBook.Domain.Enums;
 
-namespace NeatBookMVC.Models.DetailsViewModels
+namespace NeatBookMVC.Models.Books
 {
     public class BookDetailsViewModel
     {

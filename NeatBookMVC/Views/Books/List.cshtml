@@ -1,29 +1,36 @@
 ﻿@model NeatBookMVC.Models.BookListViewModel
 
-<h2>Book List</h2>
+<h2>Books</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Genre</th>
-            <th>Language</th>
-            <th>Published Date</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
+@if (Model.Books != null && Model.Books.Any())
+{
+    <ul>
         @foreach (var book in Model.Books)
         {
-            <tr>
-                <td>@book.Name</td>
-                <td>@book.BookGenre</td>
-                <td>@book.Language</td>
-                <td>@book.PublishingDate</td>
-                <td>
-                    <a href="@Url.Action("Index", "BookDetails")">Details</a>
-                </td>
-            </tr>
+            <li>
+                <h3>@book.Name</h3>
+                <p>Description: @book.Description</p>
+                <p>Genre: @book.BookGenre</p>
+                <p>Language: @book.Language</p>
+                <p>Status: @book.BookStatus</p>
+                <p>Rights: @book.AuthorRights</p>
+                <p>Age Restriction: @book.AgeRestriction</p>
+                <p>Creation Date: @book.CreationDate.ToShortDateString()</p>
+                <p>Published: @book.Published</p>
+                @if (book.PublishingDate.HasValue)
+                {
+                    <p>Publishing Date: @book.PublishingDate.Value.ToShortDateString()</p>
+                }
+                <p>View Count: @book.ViewCount</p>
+                <p>Created by: @book.User.Name</p>
+                <p>Chapters Count: @book.Chapters.Count()</p>
+                <p>Comments Count: @book.Comments.Count()</p>
+                <p>Likes Count: @book.Likes.Count()</p>
+            </li>
         }
-    </tbody>
-</table>
+    </ul>
+}
+else
+{
+    <p>No books available in the list.</p>
+}
