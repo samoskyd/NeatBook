@@ -13,6 +13,8 @@ namespace NeatBook.Domain.Entities
         public string Name { get; set; }
         public string Description { get; set; }
 
+        public string CoverImagePath { get; set; } = "C:\\Users\\maksm\\source\\repos\\NeatBook\\NeatBookMVC\\wwwroot\\images\\book_cover.jpg";
+
         public BookGenre BookGenre { get; set; }
         public Language Language { get; set; }
         public BookStatus BookStatus { get; set; }

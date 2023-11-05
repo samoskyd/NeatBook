@@ -9,7 +9,11 @@
     <ul>
         @foreach (var book in Model.Books.Take(10))
         {
-            <li><a asp-controller="Books" asp-action="Details" asp-route-id="@book.Id">@book.Name</a></li>
+            <li><a asp-controller="Books" asp-action="Details" asp-route-id="@book.Id">
+                    <img src="@book.CoverImagePath" alt="Book Cover" class="miniature-image">
+                    @book.Name
+                </a>
+            </li>
         }
     </ul>
 </div>
@@ -29,7 +33,11 @@
     <ul>
         @foreach (var user in Model.Users.Take(10))
         {
-            <li><a asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">@user.Name</a></li>
+            <li><a asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">
+                    <img src="@user.AvatarImagePath" alt="User Avatar" class="miniature-image">
+                    @user.Name
+                </a>
+            </li>
         }
     </ul>
 </div>
