@@ -5,6 +5,8 @@ namespace NeatBookMVC.Models.Books
 {
     public class BookDetailsViewModel
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
         public string CoverImagePath { get; set; } = "C:\\Users\\maksm\\source\\repos\\NeatBook\\NeatBookMVC\\wwwroot\\images\\book_cover.jpg";
         public BookGenre BookGenre { get; set; }

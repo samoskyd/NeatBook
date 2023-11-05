@@ -4,6 +4,8 @@
 
 <div>
     <h3>@Model.Name</h3>
+    <a asp-controller="Chapters" asp-action="FirstChapterDetails" asp-route-bookId="@Model.Id" class="btn btn-primary">Read</a>
+    <a asp-controller="Chapters" asp-action="List" asp-route-bookId="@Model.Id" class="btn btn-primary">Chapters List</a>
     <img src="@Model.CoverImagePath" alt="Book Cover" class="miniature-image">
     <p>Genre: @Model.BookGenre</p>
     <p>Language: @Model.Language</p>

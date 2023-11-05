@@ -6,8 +6,41 @@
     <h3>@Model.Name</h3>
     @if (!string.IsNullOrEmpty(Model.Text))
     {
-        <p>@Model.Text</p>
+        <div>
+            <iframe id="pdfViewer" src=@Model.Text></iframe>
+        </div>
+        <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+        <script>
+            var pdfjsLib = window['pdfjs-dist/build/pdf'];
+
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
+
+            var pdfViewer = document.getElementById('pdfViewer');
+
+            pdfjsLib.getDocument(pdfViewer.src).then(function (pdf) {
+                pdf.getPage(1).then(function (page) {
+                    var scale = 1.5;
+                    var viewport = page.getViewport({ scale: scale });
+
+                    var canvas = document.createElement('canvas');
+                    var context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    var container = pdfViewer.parentNode;
+                    container.appendChild(canvas);
+
+                    page.render({
+                        canvasContext: context,
+                        viewport: viewport
+                    });
+                });
+            });
+        </script>
+
     }
-    <p>Order: @Model.Order</p>
-    <p>Book ID: @Model.BookId</p>
+    else
+    {
+        <p>the chapter doesn't have text'</p>
+    }
 </div>

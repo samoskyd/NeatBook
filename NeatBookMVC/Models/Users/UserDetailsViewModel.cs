@@ -4,6 +4,7 @@ namespace NeatBookMVC.Models.Users
 {
     public class UserDetailsViewModel
     {
+        public int Id { get; set; } 
         public string AvatarImagePath { get; set; } = "C:\\Users\\maksm\\source\\repos\\NeatBook\\NeatBookMVC\\wwwroot\\images\\user_avatar.jpg";
 
         public string Name { get; set; }

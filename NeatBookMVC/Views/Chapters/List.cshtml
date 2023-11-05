@@ -4,22 +4,27 @@
 
 @if (Model.Chapters != null && Model.Chapters.Any())
 {
-    <ul>
-        @foreach (var chapter in Model.Chapters)
-        {
-            <li>
-                <h3>@chapter.Name</h3>
-                <p>Order: @chapter.Order</p>
-                <p>Published: @chapter.Published</p>
-                @if (chapter.PublishingDate.HasValue)
-                {
-                    <p>Publishing Date: @chapter.PublishingDate.Value.ToShortDateString()</p>
-                }
-                <p>Creation Date: @chapter.CreationDate.ToShortDateString()</p>
-                <p>Book ID: @chapter.BookId</p>
-            </li>
-        }
-    </ul>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Order</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var chapter in Model.Chapters)
+            {
+                <tr>
+                    <td>@chapter.Name</td>
+                    <td>@chapter.Order</td>
+                    <td>
+                        <a asp-controller="Chapters" asp-action="Details" asp-route-id="@chapter.Id" class="btn btn-primary">View</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 else
 {

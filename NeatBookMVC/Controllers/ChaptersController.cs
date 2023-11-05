@@ -5,6 +5,7 @@ using NeatBook.Application.Features.Books.Queries.GetBookById;
 using NeatBook.Application.Features.Chapters.Commands.UpdateChapter;
 using NeatBook.Application.Features.Chapters.Queries.GetChapterById;
 using NeatBook.Application.Features.Chapters.Queries.GetChaptersByBook;
+using NeatBook.Application.Features.Chapters.Queries.GetFirstChapterIdByBook;
 using NeatBook.Application.Features.Users.Commands.UpdateUser;
 using NeatBook.Domain.Entities;
 using NeatBookMVC.DTOs;
@@ -37,6 +38,13 @@ namespace NeatBookMVC.Controllers
             };
 
             return View(model);
+        }
+
+        public async Task<IActionResult> FirstChapterDetails(int bookId)
+        {
+            var firstChapterId = await _mediator.Send(new GetFirstChapterIdByBookQuery(bookId));
+            
+            return RedirectToAction("Details", firstChapterId);
         }
 
         public async Task<IActionResult> Details(int id)

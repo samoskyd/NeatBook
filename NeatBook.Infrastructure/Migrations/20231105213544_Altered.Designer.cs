@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NeatBook.Infrastructure.Contexts;
 
@@ -11,9 +12,11 @@ using NeatBook.Infrastructure.Contexts;
 namespace NeatBook.Infrastructure.Migrations
 {
     [DbContext(typeof(NeatBookDbContext))]
-    partial class NeatBookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231105213544_Altered")]
+    partial class Altered
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
