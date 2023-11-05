@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NeatBook.Application.Features.Articles.Commands.UpdateArticle;
+using NeatBook.Application.Features.Articles.Queries.GetAllArticles;
 using NeatBook.Application.Features.Articles.Queries.GetArticleById;
 using NeatBook.Application.Features.Users.Commands.UpdateUser;
 using NeatBook.Domain.Entities;
@@ -27,11 +28,11 @@ namespace NeatBookMVC.Controllers
 
         public async Task<IActionResult> List()
         {
+            var articles = await _mediator.Send(new GetAllArticlesQuery());
             var model = new ArticleListViewModel
             {
-                Articles = new List<Article>()
+                Articles = articles
             };
-            // get data of all articles with await
 
             return View(model);
         }

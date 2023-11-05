@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using NeatBook.Application.Features.Books.Queries.GetBookById;
 using NeatBook.Application.Features.Chapters.Commands.UpdateChapter;
 using NeatBook.Application.Features.Chapters.Queries.GetChapterById;
+using NeatBook.Application.Features.Chapters.Queries.GetChaptersByBook;
 using NeatBook.Application.Features.Users.Commands.UpdateUser;
 using NeatBook.Domain.Entities;
 using NeatBookMVC.DTOs;
@@ -26,13 +27,14 @@ namespace NeatBookMVC.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(int bookId)
         {
+            var chapters = await _mediator.Send(new GetChaptersByBookQuery(bookId));
             var model = new ChapterListViewModel
             {
-                Chapters = new List<Chapter>()
+                Chapters = chapters,
+                BookId = bookId
             };
-            // get data of all Chapters with await
 
             return View(model);
         }
