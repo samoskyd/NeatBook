@@ -6,6 +6,8 @@ using NeatBook.Application.Features.Chapters.Commands.UpdateChapter;
 using NeatBook.Application.Features.Chapters.Queries.GetChapterById;
 using NeatBook.Application.Features.Chapters.Queries.GetChaptersByBook;
 using NeatBook.Application.Features.Chapters.Queries.GetFirstChapterIdByBook;
+using NeatBook.Application.Features.Chapters.Queries.GetNextChapter;
+using NeatBook.Application.Features.Chapters.Queries.GetPreviousChapter;
 using NeatBook.Application.Features.Users.Commands.UpdateUser;
 using NeatBook.Domain.Entities;
 using NeatBookMVC.DTOs;
@@ -43,9 +45,24 @@ namespace NeatBookMVC.Controllers
         public async Task<IActionResult> FirstChapterDetails(int bookId)
         {
             var firstChapterId = await _mediator.Send(new GetFirstChapterIdByBookQuery(bookId));
-            
-            return RedirectToAction("Details", firstChapterId);
+
+            return RedirectToAction("Details", new { id = firstChapterId });
         }
+        
+        public async Task<IActionResult> NextChapterDetails(int id)
+        {
+            var nextChapterId = await _mediator.Send(new GetNextChapterQuery(id));
+
+            return RedirectToAction("Details", new { id = nextChapterId });
+        }
+        
+        public async Task<IActionResult> PreviousChapterDetails(int id)
+        {
+            var previousChapterId = await _mediator.Send(new GetPreviousChapterQuery(id));
+
+            return RedirectToAction("Details", new { id = previousChapterId });
+        }
+
 
         public async Task<IActionResult> Details(int id)
         {

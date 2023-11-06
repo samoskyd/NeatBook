@@ -43,4 +43,9 @@
     {
         <p>the chapter doesn't have text'</p>
     }
+    <a asp-controller="Chapters" asp-action="NextChapterDetails" asp-route-id="@Model.Id" class="btn btn-primary">Read Next</a>
+    @if (Model.Order != 1)
+    {
+        <a asp-controller="Chapters" asp-action="PreviousChapterDetails" asp-route-id="@Model.Id" class="btn btn-primary">Read Previous</a>
+    }
 </div>
