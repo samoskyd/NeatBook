@@ -13,8 +13,8 @@ namespace NeatBook.Domain.Entities
         public string Name { get; set; }
         public string? Surname { get; set; }
         public string? BioText { get; set; }
-
-        public string AvatarImagePath { get; set; } = "C:\\Users\\maksm\\source\\repos\\NeatBook\\NeatBookMVC\\wwwroot\\images\\user_avatar.jpg";
+        
+        public string AvatarImagePath { get; set; }
 
         public string Nickname { get; set; }
         public string Email { get; set; }

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NeatBook.Domain.Entities;
 using NeatBook.Infrastructure.Contexts;
 using System;
@@ -28,7 +29,10 @@ namespace NeatBook.Application.Features.Users.Queries.GetUserById
 
         public Task<User> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Id == request.Id);
+            var user = _context.Users.
+                Include(u => u.Books).
+                Include(u => u.Articles)
+                .FirstOrDefault(u => u.Id == request.Id);
             
             return Task.FromResult(user);
         }

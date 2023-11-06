@@ -10,7 +10,7 @@
         @foreach (var book in Model.Books.Take(10))
         {
             <li><a asp-controller="Books" asp-action="Details" asp-route-id="@book.Id">
-                    <img src="@book.CoverImagePath" alt="Book Cover" class="miniature-image">
+                    <img src="@book.CoverImagePath" alt="Book Cover" class="miniature-image" style="width: 50px; height: 50px;">
                     @book.Name
                 </a>
             </li>
@@ -34,7 +34,7 @@
         @foreach (var user in Model.Users.Take(10))
         {
             <li><a asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">
-                    <img src="@user.AvatarImagePath" alt="User Avatar" class="miniature-image">
+                    <img src="@user.AvatarImagePath" alt="User Avatar" class="miniature-image" style="width: 100px; height: 50px;">
                     @user.Name
                 </a>
             </li>

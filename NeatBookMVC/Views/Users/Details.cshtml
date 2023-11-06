@@ -14,7 +14,7 @@
     @foreach (var book in Model.Books)
     {
         <li>
-            <a asp-controller="BookDetails" asp-action="Index" asp-route-id="@book.Id">@book.Name</a>
+            <a asp-controller="Books" asp-action="Details" asp-route-id="@book.Id">@book.Name</a>
         </li>
     }
 </ul>
@@ -24,7 +24,7 @@
     @foreach (var article in Model.Articles)
     {
         <li>
-            <a asp-controller="ArticleDetails" asp-action="Index" asp-route-id="@article.Id">@article.Name</a>
+            <a asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id">@article.Name</a>
         </li>
     }
 </ul>

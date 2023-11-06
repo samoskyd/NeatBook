@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NeatBook.Application.Features.Chapters.Queries.GetChaptersByBook;
 using NeatBook.Domain.Entities;
 using NeatBook.Infrastructure.Contexts;
@@ -29,7 +30,7 @@ namespace NeatBook.Application.Features.Chapters.Queries.GetFirstChapterIdByBook
 
         public Task<int> Handle(GetFirstChapterIdByBookQuery request, CancellationToken cancellationToken)
         {
-            var book = _context.Books.FirstOrDefault(u => u.Id == request.BookId);
+            var book = _context.Books.Include(b => b.Chapters).FirstOrDefault(u => u.Id == request.BookId);
             var chapter = book.Chapters.FirstOrDefault(u => u.Order == 1);
             var chapterId = chapter.Id;
             return Task.FromResult(chapterId);

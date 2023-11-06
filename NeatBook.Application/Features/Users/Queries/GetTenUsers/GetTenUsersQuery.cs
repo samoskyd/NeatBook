@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NeatBook.Domain.Entities;
 using NeatBook.Infrastructure.Contexts;
 using System;
@@ -23,7 +24,8 @@ namespace NeatBook.Application.Features.Users.Queries.GetTenUsers
 
         public Task<List<User>> Handle(GetTenUsersQuery request, CancellationToken cancellationToken)
         {
-            var users = _context.Users.Take(10).ToList();
+            var users = _context.Users.
+                Take(10).ToList();
 
             return Task.FromResult(users);
         }
